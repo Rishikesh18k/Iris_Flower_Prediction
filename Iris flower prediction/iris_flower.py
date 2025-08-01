@@ -11,6 +11,10 @@ win.resizable(False, False)
 win.config(bg="#333333")
 def get_value():
     warnings.filterwarnings("ignore")
+    sl = eval(sepal_length_value.get())
+    sw = eval(sepal_width_value.get())
+    pl = eval(petal_length_value.get())
+    pw = eval(petal_width_value.get())
     load_data = load_iris()
     file = pd.DataFrame(load_data.data, columns=load_data.feature_names)
     file["species"] = load_data.target
@@ -19,7 +23,7 @@ def get_value():
     train_x,test_x,train_y,test_y=train_test_split(x,y,test_size=0.2)
     model = KNeighborsClassifier()
     model.fit(train_x,train_y)
-    prediction_value = model.predict([[2,2,2,2]])
+    prediction_value = model.predict([[sl,sw,pl,pw]])
     score_price = model.score(test_x,test_y)
     score = (score_price*100)
     if int(prediction_value[0])==0:
@@ -35,7 +39,7 @@ def clear():
     iris_value.delete(0, END)
     sepal_length_entry.delete(0, END)
     sepal_width_entry.delete(0, END)
-    petal_lenght_entry.delete(0, END)
+    petal_length_entry.delete(0, END)
     petal_width_entry.delete(0, END)
     iris_value.configure(text="----------", font=("Franklin Gothic Demi Cond", 22), text_color="#737373")
     percentage_value.configure(text="000%", font=("Franklin Gothic Demi Cond", 22), text_color="#737373")
@@ -61,11 +65,11 @@ sepal_width_entry.place(x=50, y=140)
 petal_length_label = CTkLabel(win, text="Enter petal length (cm)", font=("Franklin Gothic Demi Cond", 16),
                      text_color="#EEEEEE", fg_color="#333333")
 petal_length_label.place(x=98, y=185)
-petal_lenght_value = StringVar()
-petal_lenght_entry = CTkEntry(win, text_color="#EEEEEE", font=("Franklin Gothic Demi Cond", 16), bg_color="#333333",
+petal_length_value = StringVar()
+petal_length_entry = CTkEntry(win, text_color="#EEEEEE", font=("Franklin Gothic Demi Cond", 16), bg_color="#333333",
                      height=35, width=246, border_width=1.50, border_color="#737373",
-                     corner_radius=4, fg_color="#444444", textvariable=petal_lenght_value)
-petal_lenght_entry.place(x=50, y=215)
+                     corner_radius=4, fg_color="#444444", textvariable=petal_length_value)
+petal_length_entry.place(x=50, y=215)
 petal_width_label = CTkLabel(win, text="Enter petal length (cm)", font=("Franklin Gothic Demi Cond", 16),
                      text_color="#EEEEEE", fg_color="#333333")
 petal_width_label.place(x=98, y=260)
